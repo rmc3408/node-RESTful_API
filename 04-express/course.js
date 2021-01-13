@@ -74,23 +74,40 @@ app.put("/api/courses/:id", (req, res) => {
   //look up the specific course, The same code as GET.
   let selected = courses.find((c) => c.id === parseInt(req.params.id));
   if (!selected) {
-    res.status(404).send("Id not found");
+      return res.status(404).send("Id not found");
+      
   }
-  //update course in courses
-  selected.name = req.body.name;
-  selected.hours = req.body.hours;
-  const { error, value } = validator(selected);
+
   //Validate if new entry
+  const { error } = validator(req.body);
   if (error) {
     res.status(400).send(error.details[0].message);
     return;
   }
-  res.send(value);
+
+  //update course in courses
+  selected.name = req.body.name;
+  selected.hours = req.body.hours;
+  res.send(selected);
 });
 
+/**
+ *        DELETE
+ */
+app.delete("/api/courses/:id", (req, res) => {
+  //look up the specific course to delete.
+  let selected = courses.find((c) => c.id === parseInt(req.params.id));
+  if (!selected) {
+      return res.status(404).send("Id not found");
+  }
 
+  //remove from our data
+  const idx = courses.indexOf(selected);
+  courses.splice(idx, 1);
 
-
+  //return updates in courses
+  res.send(courses);
+});
 
 function validator(selected) {
   const schema = {
