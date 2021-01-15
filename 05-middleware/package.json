@@ -1,0 +1,24 @@
+{
+  "name": "04-express",
+  "version": "1.0.0",
+  "description": "> Module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmc3408/node-RESTful_API.git"
+  },
+  "author": "Raphael",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rmc3408/node-RESTful_API/issues"
+  },
+  "homepage": "https://github.com/rmc3408/node-RESTful_API#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^13.1.0",
+    "morgan": "^1.10.0"
+  }
+}
