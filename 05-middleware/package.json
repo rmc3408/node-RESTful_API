@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/rmc3408/node-RESTful_API#readme",
   "dependencies": {
+    "config": "^3.3.3",
+    "debug": "^4.3.1",
     "express": "^4.17.1",
     "joi": "^13.1.0",
     "morgan": "^1.10.0"
