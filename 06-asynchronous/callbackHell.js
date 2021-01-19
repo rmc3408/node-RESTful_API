@@ -1,12 +1,12 @@
 const user = { id: 1, gitName: "rmc3408" };
 
-// getUser(1, () => {
-//   getRepos(user.gitName, (reps) => {
-//       getCommits(repo, (com) => {
-//           console.log(com);
-//     });
-//   });
-// });
+getUser(1, () => {
+  getRepos(user.gitName, (reps) => {
+      getCommits(repo, (com) => {
+          console.log(com);
+    });
+  });
+});
 
 getUser(1, getRepositories);
 
