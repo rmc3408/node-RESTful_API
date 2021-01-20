@@ -38,8 +38,8 @@ getUser(1, () => {
       SIMPLIFYING!!!
 */
 
-const u = getUser(1);
-u.then(a => console.log('User details = ', a));
+//const u = getUser(1);
+//u.then(a => console.log('User details = ', a));
 
 
 getUser(2)
@@ -49,13 +49,13 @@ getUser(2)
     .catch(err => console.log('Error is ', err.message)); //Catch is from any of them. all 3 of them.
 
 
+
     
-    
-function getUser(id) {
+function getUser(theId) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log("Reading user info from database...");
-      resolve({ id: id, gitName: "rmc3408" });
+      resolve({ id: theId, gitName: "rmc3408" });
     }, 2000);
   });
 }
