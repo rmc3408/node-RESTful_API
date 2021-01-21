@@ -1,18 +1,18 @@
 const p = new Promise((resolve, reject) => {
-  //resolve(1); //PASS
-  //setTimeout(() => resolve(1), 2000);
+  //resolve(1); //PASS syncronouss
+  setTimeout(() => resolve(1), 2000); //PASS ASyncronouss
 
-  //reject(new Error('message')); //FAIL
-  //setTimeout(() => reject(new Error("Something wrong")), 2000);
+  //reject(new Error('message')); //FAIL syncronouss
+  setTimeout(() => reject(new Error("Something wrong")), 2000); //Fail Asyncronouss
 });
 
-// then = Success
-// catch = Error
+//then = Success
+//catch = Error
 p.then((result) => console.log(`Result is ${result}`))
     .catch((result) => console.log("Error is", result.message) );
 
 /**
- *
+ *  CALL BACK
 getUser(1, function (user) {
   console.log("result from callback function in getUser =", user);
 
