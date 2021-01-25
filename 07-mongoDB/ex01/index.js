@@ -18,7 +18,7 @@ const myMoshSchema = mongoose.Schema({
 
 const Exercise = mongoose.model('courses', myMoshSchema);
 
-async function getAllCourse() {
+async function getAllCourseBackend() {
     const result = await Exercise
         .find({ tags: "backend", isPublished: true })
         .sort({ name: 1 })
@@ -26,8 +26,31 @@ async function getAllCourse() {
         ;
     return result;
 }
-let newPage;
-getAllCourse().then(r => console.log(r));
+//getAllCourseBackend().then(r => console.log(r));
+
+
+async function getCourseFrontBack() {
+    return await Exercise
+        .find({ isPublished: true })
+        .or([{ tags: "backend" }, { tags: "frontend" } ])
+        .sort({ price: -1 })
+        .select({ name: 1, author: 1 });
+}
+
+async function getCoursesBY() {
+    return await Exercise
+        .find({ isPublished: true })
+        .or([{ price: { $gte: 15 } }, { name: /.*by.*/i }]);
+}
+
+
+async function run() {
+    const bf = await getCourseFrontBack();
+    const by = await getCoursesBY();
+    console.log(by);
+}
+
+run();
 
 
 app.get('/', (req, res) => { 
