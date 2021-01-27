@@ -9,28 +9,65 @@ mongoose.connect('mongodb://localhost/playground', {useNewUrlParser: true, useUn
 
 //Create Schema
 const courseSchema = new mongoose.Schema({
-    name: { type: String, required: true },
     author: String,
-    price: Number,
-    tags: [String],
-    date: { type: Date, default: Date.now },
-    isPublished: Boolean
+    isPublished: Boolean,
+    //tags: [String],
+    tags: Array,
+    name: {
+        type: String,
+        required: true,
+        minlength: 3,
+        maxlength: 255,
+        match: /.*a.*/i
+    },
+    category: {
+        type: String,
+        lowercase: true,
+        required: true,
+        enum: ['web','mobile','network']
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    },
+    price: {
+        type: Number,
+        min: 2.99,
+        max: 250,
+        required: function () {
+            return this.isPublished;
+        }
+    }
 });
 
 //Model (template of collections = Class)
 const CourseClass = mongoose.model('courses', courseSchema); //Create a Class following this template 
 
-
+//CReate
+async function createCourse() {
+    const course = new CourseClass({
+        name: 'Web development',
+        author: 'Angela Yu',
+        price: 129,
+        tags: ['backend', 'webdesign', 'react', 'frontend'],
+        isPublished: true
+    });
+    try {
+        const result = await course.save();
+        //console.log(result); 
+    } catch (err) {
+        console.log(err.message);
+        console.log(err.errors);
+    }
+    
+} 
+//createCourse();
 
 async function getCourses() {
-   
-
     const allCourse = await CourseClass;
-        
     console.log(allCourse);
-    
 }
-getCourses();
+//getCourses();
 
 
 //get
@@ -47,19 +84,7 @@ async function getUpdateCourse(id) {
 }
 //getUpdateCourse('600e1d7eebc98a2344f171d1');
 
-//CReate
-async function createCourse() {
-    const course = new CourseClass({
-        name: 'Web development',
-        author: 'Angela Yu',
-        price: 129,
-        tags: ['backend', 'webdesign', 'react', 'frontend'],
-        isPublished: true
-    });
-    const result = await course.save();
-    //console.log(result);
-} 
-//createCourse();
+
 
 
 //update direct in Database
