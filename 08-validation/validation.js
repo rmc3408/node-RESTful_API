@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 //Connect to mongoose
-mongoose.connect('mongodb://localhost/playground', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://localhost/Mosh-nodeCourse', {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('Connect to MongoDB server...'))
     .catch(err => console.error('Unable to Connect to MongoDB server...', err));
 
@@ -23,6 +23,7 @@ const courseSchema = new mongoose.Schema({
     category: {
         type: String,
         lowercase: true,
+        trim: true,
         required: true,
         enum: ['web','mobile','network']
     },
@@ -36,7 +37,9 @@ const courseSchema = new mongoose.Schema({
         max: 250,
         required: function () {
             return this.isPublished;
-        }
+        },
+        get: v => Math.ceil(v), //read an existing value from database
+        set: v => Math.floor(v) //create new values.
     }
 });
 

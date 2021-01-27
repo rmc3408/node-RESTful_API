@@ -10,7 +10,7 @@ const app = express();
 //app.use('/api', genres);
 
 //Connect to mongoose
-mongoose.connect('mongodb://localhost/playground', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://localhost/Mosh-nodeCourse', {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('Connect to MongoDB server...'))
     .catch(err => console.error('Unable to Connect to MongoDB server...', err));
 
