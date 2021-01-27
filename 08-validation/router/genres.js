@@ -1,24 +1,6 @@
-const mongoose = require("mongoose");
 const express = require("express");
-const Joi = require('joi');
 const router = express.Router(); // to export need to use ROUTER
-
-const genreSchema = mongoose.Schema({
-  //id: AUTOMATIC created by mongo _id: object
-  name: {
-      type: String,
-      required: true,
-      minlength: 3
-  }
-});
-const GenreModel = mongoose.model('Genre', genreSchema);
-
-function validateGenre(genre) {
-    const schema = {
-      name: Joi.string().min(3).required()
-    };
-    return Joi.validate(genre, schema);
-}
+const { GenreModel, validateGenre } = require('../models/genres');
 
 
 //read
@@ -62,6 +44,5 @@ router.get('/:id', async (req, res) => {
   res.send(theGenre);
 });
 
-  
 
 module.exports = router;

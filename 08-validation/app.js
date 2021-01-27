@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
-const genres = require("./genres");
-const customers = require('./customers');
+const genres = require("./router/genres");
+const customers = require('./router/customers');
 
 app.use(express.json());
 app.use("/genres", genres);

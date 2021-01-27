@@ -1,36 +1,6 @@
-const mongoose = require("mongoose");
 const express = require("express");
-const Joi = require('joi');
 const router = express.Router(); // to export need to use ROUTER
-
-const custSchema = mongoose.Schema({
-  isGold: {
-    type: Boolean,
-    default: false
-  },
-  name: {
-      type: String,
-      required: true,
-      minlength: 3
-  },
-  phone: {
-    type: Number,
-    default: 1111,
-    min: 1000,
-    maxlength: 100000
-  }
-});
-const CustModel = mongoose.model('Customer', custSchema);
-
-function validateGenre(customer) {
-  const schema = {
-      isGold: Joi.boolean(),
-      name: Joi.string().min(3).required(),
-      phone: Joi.number().required()
-    };
-    return Joi.validate(customer, schema);
-}
-
+const { CustModel, validateGenre } = require('../models/customer');
 
 //read
 router.get('/', async (req, res) => {
@@ -74,5 +44,4 @@ router.get('/:id', async (req, res) => {
 });
 
   
-
 module.exports = router;
