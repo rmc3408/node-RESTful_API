@@ -14,7 +14,7 @@ app.use('/movies', movies);
 app.use('/rentals', rentals);
 
 
-mongoose.connect("mongodb://localhost/Mosh-nodeCourse", {useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb://localhost/Mosh-nodeCourse", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(()=> console.log("Mosh-nodeCourse database is online..."));
 
 app.get("/", (req, res) => {
