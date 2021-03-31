@@ -11,7 +11,7 @@ app.use(express.json());
 app.use("/genres", genres);
 app.use('/customers', customers);
 app.use('/movies', movies);
-app.use('/api/rentals', rentals);
+app.use('/rentals', rentals);
 
 
 mongoose.connect("mongodb://localhost/Mosh-nodeCourse", {useNewUrlParser: true, useUnifiedTopology: true })

@@ -20,7 +20,7 @@ const custSchema = mongoose.Schema({
 });
 const CustModel = mongoose.model("Customer", custSchema);
 
-function validateGenre(customer) {
+function validateCustomer(customer) {
   const schema = {
     isGold: Joi.boolean(),
     name: Joi.string().min(3).required(),
@@ -30,4 +30,4 @@ function validateGenre(customer) {
 }
 
 module.exports.CustModel = CustModel;
-module.exports.validateGenre = validateGenre;
+module.exports.validateCustomer = validateCustomer;

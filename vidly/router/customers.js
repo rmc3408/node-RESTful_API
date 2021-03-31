@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router(); // to export need to use ROUTER
-const { CustModel, validateGenre } = require('../models/customer');
+const { CustModel, validateCustomer } = require('../models/customer');
 
 //read
 router.get('/', async (req, res) => {
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { error } = validateGenre(req.body); 
+    const { error } = validateCustomer(req.body); 
     if (error) return res.status(400).send(error.details[0].message);
     
     let customer = new CustModel({ name: req.body.name, phone: req.body.phone, isGold: req.body.isGold });
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
 
 //update
 router.put('/:id', async (req, res) => {
-  const { error } = validateGenre(req.body); 
+  const { error } = validateCustomer(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
     
   let updatedCust = await CustModel.findByIdAndUpdate(req.params.id, { name: req.body.name, phone: req.body.phone, isGold: req.body.isGold }, { new: true });

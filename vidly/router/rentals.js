@@ -1,6 +1,6 @@
 const {Rental, validate} = require('../models/rental'); 
-const {Movie} = require('../models/movie'); 
-const {Customer} = require('../models/customer'); 
+const { MovieModel} = require('../models/movie'); 
+const { CustModel } = require('../models/customer'); 
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
@@ -14,10 +14,10 @@ router.post('/', async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
 
-  const customer = await Customer.findById(req.body.customerId);
+  const customer = await CustModel.findById(req.body.customerId);
   if (!customer) return res.status(400).send('Invalid customer.');
 
-  const movie = await Movie.findById(req.body.movieId);
+  const movie = await MovieModel.findById(req.body.movieId);
   if (!movie) return res.status(400).send('Invalid movie.');
 
   if (movie.numberInStock === 0) return res.status(400).send('Movie not in stock.');
@@ -39,6 +39,8 @@ router.post('/', async (req, res) => {
   movie.numberInStock--;
   movie.save();
   
+  //need transaction
+
   res.send(rental);
 });
 
