@@ -26,6 +26,7 @@ getUser(1, function (user) {
 });
 
 
+
 getUser(1, () => {
     getRepos(user.gitName, (reps) => {
         getCommits(repo, (com) => {
@@ -49,7 +50,12 @@ getUser(2)
     .catch(err => console.log('Error is ', err.message)); //Catch is from any of them. all 3 of them.
 
 
-
+    // function getUser(id, callback) {
+    //   setTimeout(() => {
+    //     console.log("Reading user from database...");
+    //     callback({ id: id, gitName: "rmc3408" }); //it is like return for Asyncronous
+    //   }, 2000);
+    // }
     
 function getUser(theId) {
   return new Promise((resolve, reject) => {

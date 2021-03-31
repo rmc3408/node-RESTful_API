@@ -29,13 +29,14 @@ async function getAllCourseBackend() {
 //getAllCourseBackend().then(r => console.log(r));
 
 
-async function getCourseFrontBack() {
+async function getAllCourses() {
     return await Exercise
         .find({ isPublished: true })
         .or([{ tags: "backend" }, { tags: "frontend" } ])
         .sort({ price: -1 })
         .select({ name: 1, author: 1 });
 }
+//getAllCourses().then(r => console.log(r));
 
 async function getCoursesBY() {
     return await Exercise
@@ -45,7 +46,7 @@ async function getCoursesBY() {
 
 
 async function run() {
-    const bf = await getCourseFrontBack();
+    const bf = await getAllCourses();
     const by = await getCoursesBY();
     console.log(by);
 }

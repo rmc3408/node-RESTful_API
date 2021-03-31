@@ -1,9 +1,11 @@
 const express = require("express");
 const logger = require("./middleware/logger"); //custom made middleware
 const authentifyer = require('./middleware/authentication'); //custom made middleware
+
 const genres = require('./routes/genres');
 const app = express();
-
+//Use the router to short application and structurize the app.
+app.use('/api', genres);
 
 
 //DEBUGGER NPM debug
@@ -22,11 +24,6 @@ app.use(express.json()); //Built-in Middleware , convert body to JSON
 app.use(express.urlencoded({extended: true})); //Built-in Middleware , convert data from URL (key=value%&key=value) into req.body
 
 app.use(express.static('public')); // //Built-in Middleware , place picture and html page
-
-
-
-//Use the router to short application and structurize the app.
-app.use('/api', genres);
 
 
 

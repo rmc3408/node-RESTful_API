@@ -61,7 +61,6 @@ async function getCourses() {
         .select({ name: 1, author: 1 }); //Only display those
         //.count() - number of documents showed!
     console.log(allCourse);
-    
 }
 //getCourses();
 
